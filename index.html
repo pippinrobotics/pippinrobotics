@@ -1,41 +1,603 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-  <title>Pippin Robotics</title>
-  <meta name="description" content="Pippin Robotics is building the software interface layer for programmable robots and remote automation.">
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pippin Robotics - AI & Robotics Company</title>
+  <meta name="description"
+    content="Pippin Robotics is building the future of AI-powered robotics. Intelligent robots for everyone. Coming soon.">
+  <meta name="keywords" content="robotics, AI, artificial intelligence, robots, automation, Pippin Robotics">
+  <meta name="robots" content="index, follow">
+
+  <!-- Open Graph / Social -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Pippin Robotics - AI & Robotics Company">
+  <meta property="og:description"
+    content="Building the future of AI-powered robotics. Intelligent robots for everyone. Coming soon.">
+  <meta property="og:site_name" content="Pippin Robotics">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Pippin Robotics - AI & Robotics Company">
+  <meta name="twitter:description"
+    content="Building the future of AI-powered robotics. Intelligent robots for everyone. Coming soon.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bungee&family=Outfit:wght@300;400;600;700&display=swap"
+    rel="stylesheet">
+
   <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --primary-red: #FF3B30;
+      --primary-blue: #007AFF;
+      --primary-yellow: #FFCC00;
+      --primary-green: #34C759;
+      --bg-cream: #FFF8F0;
+      --bg-card: rgba(255, 255, 255, 0.85);
+    }
+
     body {
-      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-      background: #0b0b0b;
-      color: white;
+      font-family: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: linear-gradient(135deg, #FFF8F0 0%, #E8F4FD 50%, #FFF0F5 100%);
+      color: #1a1a2e;
+      min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* Particle canvas */
+    #particle-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1000;
+    }
+
+    /* Floating shapes container */
+    .shapes-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      z-index: 0;
+    }
+
+    .shape {
+      position: absolute;
+      opacity: 0.7;
+    }
+
+    /* Circle shapes */
+    .circle {
+      border-radius: 50%;
+    }
+
+    .circle-1 {
+      width: 100px;
+      height: 100px;
+      background: var(--primary-red);
+      top: 12%;
+      left: 8%;
+      animation: float1 8s ease-in-out infinite;
+    }
+
+    .circle-2 {
+      width: 140px;
+      height: 140px;
+      background: var(--primary-blue);
+      top: 55%;
+      right: 12%;
+      animation: float2 10s ease-in-out infinite;
+    }
+
+    .circle-3 {
+      width: 70px;
+      height: 70px;
+      background: var(--primary-yellow);
+      bottom: 18%;
+      left: 18%;
+      animation: float3 7s ease-in-out infinite;
+    }
+
+    /* Triangle shapes */
+    .triangle {
+      width: 0;
+      height: 0;
+      background: transparent !important;
+    }
+
+    .triangle-1 {
+      border-left: 50px solid transparent;
+      border-right: 50px solid transparent;
+      border-bottom: 86px solid var(--primary-yellow);
+      top: 22%;
+      right: 18%;
+      animation: float2 9s ease-in-out infinite, spin 20s linear infinite;
+    }
+
+    .triangle-2 {
+      border-left: 35px solid transparent;
+      border-right: 35px solid transparent;
+      border-bottom: 60px solid var(--primary-red);
+      bottom: 28%;
+      right: 28%;
+      animation: float1 11s ease-in-out infinite, spin 25s linear infinite reverse;
+    }
+
+    /* Square shapes */
+    .square {
+      border-radius: 12px;
+    }
+
+    .square-1 {
+      width: 80px;
+      height: 80px;
+      background: var(--primary-blue);
+      top: 65%;
+      left: 6%;
+      animation: float3 8s ease-in-out infinite, spin 30s linear infinite;
+    }
+
+    .square-2 {
+      width: 50px;
+      height: 50px;
+      background: var(--primary-green);
+      top: 8%;
+      right: 32%;
+      animation: float1 6s ease-in-out infinite, spin 15s linear infinite reverse;
+    }
+
+    .square-3 {
+      width: 90px;
+      height: 90px;
+      background: var(--primary-yellow);
+      bottom: 8%;
+      right: 8%;
+      animation: float2 12s ease-in-out infinite;
+    }
+
+    /* Additional shapes */
+    .circle-4 {
+      width: 45px;
+      height: 45px;
+      background: var(--primary-green);
+      top: 38%;
+      left: 4%;
+      animation: float2 9s ease-in-out infinite;
+    }
+
+    .circle-5 {
+      width: 110px;
+      height: 110px;
+      background: var(--primary-red);
+      bottom: 5%;
+      left: 42%;
+      animation: float1 11s ease-in-out infinite;
+    }
+
+    @keyframes float1 {
+
+      0%,
+      100% {
+        transform: translateY(0) translateX(0);
+      }
+
+      25% {
+        transform: translateY(-25px) translateX(12px);
+      }
+
+      50% {
+        transform: translateY(-12px) translateX(-12px);
+      }
+
+      75% {
+        transform: translateY(-35px) translateX(6px);
+      }
+    }
+
+    @keyframes float2 {
+
+      0%,
+      100% {
+        transform: translateY(0) translateX(0);
+      }
+
+      33% {
+        transform: translateY(25px) translateX(-18px);
+      }
+
+      66% {
+        transform: translateY(-18px) translateX(12px);
+      }
+    }
+
+    @keyframes float3 {
+
+      0%,
+      100% {
+        transform: translateY(0) translateX(0);
+      }
+
+      50% {
+        transform: translateY(-30px) translateX(-25px);
+      }
+    }
+
+    @keyframes spin {
+      from {
+        transform: rotate(0deg);
+      }
+
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    /* Main content */
+    .main-content {
+      position: relative;
+      z-index: 10;
       display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
-      height: 100vh;
-      margin: 0;
+      min-height: 100vh;
+      padding: 40px 20px;
+    }
+
+    /* Hero content - no container, directly on background */
+    .hero-card {
+      background: transparent;
       text-align: center;
+      max-width: 650px;
+      padding: 40px 20px;
+      animation: fadeInUp 1s ease-out;
     }
-    .container {
-      max-width: 700px;
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
+
+    /* Logo */
+    .logo-container {
+      margin-bottom: 5px;
+      animation: logoEntrance 1.2s ease-out;
+    }
+
+    @keyframes logoEntrance {
+      from {
+        opacity: 0;
+        transform: scale(0.8);
+      }
+
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    .logo {
+      width: 180px;
+      height: 180px;
+      transition: transform 0.3s ease;
+      animation: headTilt 12s ease-in-out infinite;
+    }
+
+    @keyframes headTilt {
+
+      0%,
+      30% {
+        transform: rotate(0deg);
+      }
+
+      35%,
+      50% {
+        transform: rotate(5deg);
+      }
+
+      55%,
+      80% {
+        transform: rotate(0deg);
+      }
+
+      85%,
+      95% {
+        transform: rotate(-5deg);
+      }
+
+      100% {
+        transform: rotate(0deg);
+      }
+    }
+
+    .logo:hover {
+      animation-play-state: paused;
+      transform: scale(1.1) rotate(5deg);
+    }
+
+    /* Robot eye blink animation */
+    @keyframes blink {
+
+      0%,
+      90%,
+      100% {
+        transform: scaleY(1);
+      }
+
+      95% {
+        transform: scaleY(0.1);
+      }
+    }
+
+    .robot-eye {
+      animation: blink 3s ease-in-out infinite;
+      transform-origin: center;
+    }
+
+    .robot-eye-left {
+      animation-delay: 0s;
+    }
+
+    .robot-eye-right {
+      animation-delay: 0.1s;
+    }
+
+    /* Typography */
     h1 {
-      font-size: 48px;
-      margin-bottom: 20px;
+      font-family: 'Bungee', -apple-system, BlinkMacSystemFont, sans-serif;
+      font-size: 3.5rem;
+      font-weight: 400;
+      letter-spacing: 0.02em;
+      margin-bottom: 5px;
+      margin-top: 0;
+      color: #1a1a2e;
+      line-height: 1.1;
+      background: none;
+      -webkit-background-clip: unset;
+      -webkit-text-fill-color: initial;
+      background-clip: unset;
     }
-    p {
-      font-size: 20px;
-      opacity: 0.7;
-      line-height: 1.6;
+
+    .tagline {
+      font-size: 1.2rem;
+      color: rgba(26, 26, 46, 0.7);
+      margin-bottom: 35px;
+      font-weight: 300;
+      line-height: 1.7;
+    }
+
+    /* Coming soon text */
+    .coming-soon-text {
+      display: inline-block;
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #1a1a2e;
+      letter-spacing: 1px;
+      margin-top: 20px;
+      padding: 10px 24px;
+      border: 2px solid #1a1a2e;
+      border-radius: 50px;
+      text-transform: uppercase;
+    }
+
+    /* Footer */
+    footer {
+      position: fixed;
+      bottom: 20px;
+      left: 0;
+      right: 0;
+      text-align: center;
+      color: rgba(26, 26, 46, 0.4);
+      font-size: 0.85rem;
+      z-index: 10;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .hero-card {
+        padding: 40px 30px;
+        margin: 20px;
+        border-radius: 24px;
+      }
+
+      h1 {
+        font-size: 2rem;
+      }
+
+      .tagline {
+        font-size: 1rem;
+      }
+
+      .logo {
+        width: 90px;
+        height: 90px;
+      }
+
+      .shape {
+        opacity: 0.5;
+        transform: scale(0.6);
+      }
     }
   </style>
 </head>
+
 <body>
-  <div class="container">
-    <h1>Pippin Robotics</h1>
-    <p>
-      Building the software interface layer for programmable robots and remote automation.
-    </p>
+  <!-- Particle effect canvas -->
+  <canvas id="particle-canvas"></canvas>
+
+  <!-- Floating geometric shapes -->
+  <div class="shapes-container">
+    <div class="shape circle circle-1"></div>
+    <div class="shape circle circle-2"></div>
+    <div class="shape circle circle-3"></div>
+    <div class="shape circle circle-4"></div>
+    <div class="shape circle circle-5"></div>
+    <div class="shape triangle triangle-1"></div>
+    <div class="shape triangle triangle-2"></div>
+    <div class="shape square square-1"></div>
+    <div class="shape square square-2"></div>
+    <div class="shape square square-3"></div>
   </div>
+
+  <!-- Main content -->
+  <main class="main-content">
+    <div class="hero-card">
+      <div class="logo-container">
+        <!-- Simple, friendly robot logo -->
+        <svg class="logo" viewBox="0 -10 120 140" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Antenna -->
+          <line x1="60" y1="18" x2="60" y2="8" stroke="#007AFF" stroke-width="4" stroke-linecap="round" />
+          <circle cx="60" cy="5" r="7" fill="#FF3B30" />
+
+          <!-- Robot head (rounded square) -->
+          <rect x="25" y="18" width="70" height="60" rx="16" fill="#007AFF" />
+
+          <!-- Face plate -->
+          <rect x="32" y="25" width="56" height="46" rx="10" fill="#E8F4FD" />
+
+          <!-- Eyes - simple rounded rectangles -->
+          <rect class="robot-eye robot-eye-left" x="38" y="40" width="14" height="16" rx="4" fill="#1a1a2e" />
+          <rect class="robot-eye robot-eye-right" x="68" y="40" width="14" height="16" rx="4" fill="#1a1a2e" />
+
+          <!-- Ears/Side panels -->
+          <rect x="15" y="38" width="10" height="20" rx="4" fill="#FFCC00" />
+          <rect x="95" y="38" width="10" height="20" rx="4" fill="#FFCC00" />
+        </svg>
+      </div>
+
+      <h1>Pippin Robotics</h1>
+      <p class="tagline">Intelligent robots that co-exist with humans.<br>AI-powered, Safe,
+        Human-focused.</p>
+
+      <p class="coming-soon-text">Coming Soon</p>
+    </div>
+  </main>
+
+  <footer>
+    &copy; 2026 Pippin Robotics. All rights reserved.
+  </footer>
+
+  <script>
+    // Cursor particle effect
+    const canvas = document.getElementById('particle-canvas');
+    const ctx = canvas.getContext('2d');
+
+    let particles = [];
+    let mouse = { x: 0, y: 0 };
+
+    const colors = ['#FF3B30', '#007AFF', '#FFCC00', '#34C759', '#5856D6'];
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+
+    class Particle {
+      constructor(x, y) {
+        this.x = x;
+        this.y = y;
+        this.size = Math.random() * 6 + 3;
+        this.speedX = (Math.random() - 0.5) * 2;
+        this.speedY = (Math.random() - 0.5) * 2;
+        this.color = colors[Math.floor(Math.random() * colors.length)];
+        this.life = 0.7;
+        this.decay = Math.random() * 0.03 + 0.02;
+        this.shapeType = Math.floor(Math.random() * 3);
+      }
+
+      update() {
+        this.x += this.speedX;
+        this.y += this.speedY;
+        this.life -= this.decay;
+        this.size *= 0.98;
+      }
+
+      draw() {
+        ctx.save();
+        ctx.globalAlpha = this.life;
+        ctx.fillStyle = this.color;
+        ctx.beginPath();
+
+        if (this.shapeType === 0) {
+          // Circle
+          ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        } else if (this.shapeType === 1) {
+          // Square
+          ctx.rect(this.x - this.size / 2, this.y - this.size / 2, this.size, this.size);
+        } else {
+          // Triangle
+          ctx.moveTo(this.x, this.y - this.size);
+          ctx.lineTo(this.x + this.size, this.y + this.size);
+          ctx.lineTo(this.x - this.size, this.y + this.size);
+          ctx.closePath();
+        }
+
+        ctx.fill();
+        ctx.restore();
+      }
+    }
+
+    let lastMouseMove = 0;
+    document.addEventListener('mousemove', (e) => {
+      mouse.x = e.clientX;
+      mouse.y = e.clientY;
+
+      // Throttle particle creation
+      const now = Date.now();
+      if (now - lastMouseMove > 80) {
+        particles.push(new Particle(mouse.x, mouse.y));
+        lastMouseMove = now;
+      }
+    });
+
+    // Touch support for mobile
+    document.addEventListener('touchmove', (e) => {
+      const touch = e.touches[0];
+      mouse.x = touch.clientX;
+      mouse.y = touch.clientY;
+
+      particles.push(new Particle(mouse.x, mouse.y));
+    });
+
+    function animate() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      particles = particles.filter(p => p.life > 0 && p.size > 0.5);
+
+      particles.forEach(particle => {
+        particle.update();
+        particle.draw();
+      });
+
+      requestAnimationFrame(animate);
+    }
+
+    animate();
+  </script>
 </body>
+
 </html>
