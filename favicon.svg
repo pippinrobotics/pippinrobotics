@@ -1,0 +1,19 @@
+<svg viewBox="0 -10 120 140" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Antenna -->
+  <line x1="60" y1="18" x2="60" y2="8" stroke="#007AFF" stroke-width="4" stroke-linecap="round" />
+  <circle cx="60" cy="5" r="7" fill="#FF3B30" />
+
+  <!-- Robot head (rounded square) -->
+  <rect x="25" y="18" width="70" height="60" rx="16" fill="#007AFF" />
+
+  <!-- Face plate -->
+  <rect x="32" y="25" width="56" height="46" rx="10" fill="#E8F4FD" />
+
+  <!-- Eyes - simple rounded rectangles -->
+  <rect x="38" y="40" width="14" height="16" rx="4" fill="#1a1a2e" />
+  <rect x="68" y="40" width="14" height="16" rx="4" fill="#1a1a2e" />
+
+  <!-- Ears/Side panels -->
+  <rect x="15" y="38" width="10" height="20" rx="4" fill="#FFCC00" />
+  <rect x="95" y="38" width="10" height="20" rx="4" fill="#FFCC00" />
+</svg>
