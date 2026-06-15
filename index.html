@@ -258,10 +258,16 @@
     }
 
     /* Main layout */
-    main {
+    .page-wrap {
       max-width: calc(var(--max-width) + var(--page-padding) * 2);
       margin: 0 auto;
-      padding: 64px var(--page-padding) 120px;
+      padding-left: var(--page-padding);
+      padding-right: var(--page-padding);
+    }
+
+    main {
+      padding-top: 64px;
+      padding-bottom: 120px;
     }
 
     /* Essay */
@@ -299,34 +305,40 @@
     }
 
     .coming-soon {
+      position: relative;
       display: block;
-      max-width: calc(var(--max-width) + var(--page-padding) * 2);
-      margin: 0 auto;
-      padding: 56px var(--page-padding) 96px;
+      padding-top: 56px;
+      padding-bottom: 96px;
       font-family: 'Hubot Sans', -apple-system, BlinkMacSystemFont, sans-serif;
       font-size: 1.15rem;
       font-weight: 600;
       letter-spacing: 0.14em;
       text-transform: uppercase;
       color: var(--text);
-      border-top: 1px solid var(--border);
       text-align: center;
+    }
+
+    .coming-soon::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: var(--page-padding);
+      right: var(--page-padding);
+      border-top: 1px solid var(--border);
     }
 
     /* Footer */
     footer {
-      border-top: 1px solid var(--border);
-      padding: 32px var(--page-padding);
+      padding: 32px 0;
     }
 
     .footer-inner {
-      max-width: calc(var(--max-width) + var(--page-padding) * 2);
-      margin: 0 auto;
       display: flex;
       flex-wrap: wrap;
       align-items: center;
       justify-content: space-between;
       gap: 12px 24px;
+      font-family: 'Hubot Sans', -apple-system, BlinkMacSystemFont, sans-serif;
       font-size: 0.85rem;
       color: var(--text-subtle);
     }
@@ -425,7 +437,7 @@
     </div>
   </header>
 
-  <main>
+  <main class="page-wrap">
     <article class="essay">
       <h1>Humanoid robots built for everyday life.</h1>
 
@@ -470,10 +482,10 @@
     </article>
   </main>
 
-  <p class="coming-soon">Coming soon</p>
+  <p class="coming-soon page-wrap">Coming soon</p>
 
   <footer>
-    <div class="footer-inner">
+    <div class="footer-inner page-wrap">
       <span class="footer-brand">Pippin Robotics &copy; 2026</span>
       <div class="footer-links">
         <span>All rights reserved</span>
