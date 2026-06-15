@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pippin Robotics - Humanoid Robotics</title>
+  <title>Pippin Robotics - AI & Robotics Company</title>
   <meta name="description"
     content="Pippin Robotics is building AI-powered humanoid robots designed to work safely alongside people. Coming soon.">
   <meta name="keywords" content="robotics, humanoid robots, AI, artificial intelligence, robots, automation, Pippin Robotics">
@@ -12,14 +12,14 @@
 
   <!-- Open Graph / Social -->
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Pippin Robotics - Humanoid Robotics">
+  <meta property="og:title" content="Pippin Robotics - AI & Robotics Company">
   <meta property="og:description"
     content="Building AI-powered humanoid robots designed to work safely alongside people. Pippin coming soon.">
   <meta property="og:site_name" content="Pippin Robotics">
 
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Pippin Robotics - Humanoid Robotics">
+  <meta name="twitter:title" content="Pippin Robotics - AI & Robotics Company">
   <meta name="twitter:description"
     content="Building AI-powered humanoid robots designed to work safely alongside people. Coming soon.">
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
@@ -84,10 +84,104 @@
       position: sticky;
       top: 0;
       z-index: 100;
-      background: rgba(250, 250, 250, 0.92);
+      background: rgba(250, 250, 250, 0.55);
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border);
+    }
+
+    .rainbow-strip-wrap {
+      max-width: calc(var(--max-width) + var(--page-padding) * 2);
+      margin: 0 auto;
+      padding: 0 var(--page-padding) 12px;
+    }
+
+    .rainbow-strip {
+      padding: 0.75px;
+      border-radius: 999px;
+      background: linear-gradient(
+        90deg,
+        #4a8fe8 0%,
+        #5a6fe8 3.5%,
+        #6a5ce8 7%,
+        #7a4de8 10.5%,
+        #9a38c8 14%,
+        #b848a8 17.5%,
+        #d04088 21%,
+        #d84848 24.5%,
+        #e06820 28%,
+        #e09018 31.5%,
+        #c8a818 35%,
+        #58a848 38.5%,
+        #2898b8 42%,
+        #4a8fe8 45.5%,
+        #4a8fe8 50%,
+        #5a6fe8 53.5%,
+        #6a5ce8 57%,
+        #7a4de8 60.5%,
+        #9a38c8 64%,
+        #b848a8 67.5%,
+        #d04088 71%,
+        #d84848 74.5%,
+        #e06820 78%,
+        #e09018 81.5%,
+        #c8a818 85%,
+        #58a848 88.5%,
+        #2898b8 92%,
+        #4a8fe8 95.5%,
+        #4a8fe8 100%
+      );
+      background-size: 200% 100%;
+      animation: gradient-flow 5s linear infinite;
+      box-shadow: 0 2px 8px rgba(96, 165, 250, 0.22);
+    }
+
+    .rainbow-strip__inner {
+      height: 3px;
+      border-radius: 999px;
+      background: linear-gradient(
+        90deg,
+        #60a5fa 0%,
+        #7088fa 3.5%,
+        #8878fc 7%,
+        #a078fc 10.5%,
+        #c868f8 14%,
+        #e070f8 17.5%,
+        #f078b8 21%,
+        #f86868 24.5%,
+        #fb923c 28%,
+        #fbbf24 31.5%,
+        #f5d038 35%,
+        #a3e635 38.5%,
+        #4ade80 42%,
+        #38d9f8 45.5%,
+        #60a5fa 50%,
+        #7088fa 53.5%,
+        #8878fc 57%,
+        #a078fc 60.5%,
+        #c868f8 64%,
+        #e070f8 67.5%,
+        #f078b8 71%,
+        #f86868 74.5%,
+        #fb923c 78%,
+        #fbbf24 81.5%,
+        #f5d038 85%,
+        #a3e635 88.5%,
+        #4ade80 92%,
+        #38d9f8 95.5%,
+        #60a5fa 100%
+      );
+      background-size: 200% 100%;
+      animation: gradient-flow 5s linear infinite;
+    }
+
+    @keyframes gradient-flow {
+      from {
+        background-position: 100% 50%;
+      }
+
+      to {
+        background-position: 0% 50%;
+      }
     }
 
     .header-inner {
@@ -128,6 +222,41 @@
       color: var(--text);
     }
 
+    .menu-toggle {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+      width: 40px;
+      height: 40px;
+      padding: 8px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+
+    .menu-toggle__bar {
+      display: block;
+      width: 100%;
+      height: 2px;
+      background: var(--text);
+      border-radius: 1px;
+      transition: transform 0.2s ease, opacity 0.2s ease;
+    }
+
+    .menu-toggle[aria-expanded="true"] .menu-toggle__bar:nth-child(1) {
+      transform: translateY(7px) rotate(45deg);
+    }
+
+    .menu-toggle[aria-expanded="true"] .menu-toggle__bar:nth-child(2) {
+      opacity: 0;
+    }
+
+    .menu-toggle[aria-expanded="true"] .menu-toggle__bar:nth-child(3) {
+      transform: translateY(-7px) rotate(-45deg);
+    }
+
     /* Main layout */
     main {
       max-width: calc(var(--max-width) + var(--page-padding) * 2);
@@ -135,74 +264,53 @@
       padding: 64px var(--page-padding) 120px;
     }
 
-    /* Hero */
-    .hero {
-      margin-bottom: 72px;
-    }
-
-    .hero-badge {
-      display: inline-block;
-      font-size: 0.8rem;
-      font-weight: 500;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-      color: var(--text-subtle);
-      margin-bottom: 28px;
-      padding-bottom: 28px;
-      border-bottom: 1px solid var(--border);
-      width: 100%;
-    }
-
-    .hero h1 {
+    /* Essay */
+    .essay h1 {
       font-family: 'Hubot Sans', -apple-system, BlinkMacSystemFont, sans-serif;
       font-size: clamp(2rem, 5vw, 2.75rem);
       font-weight: 500;
       letter-spacing: -0.02em;
       line-height: 1.15;
       margin-bottom: 28px;
-      text-transform: none;
     }
 
-    .hero-lead {
-      font-size: 1.15rem;
-      line-height: 1.7;
-      color: var(--text);
-      margin-bottom: 24px;
-    }
-
-    .hero-body {
-      color: var(--text-muted);
-      margin-bottom: 0;
-    }
-
-    /* Sections */
-    section {
-      margin-bottom: 64px;
-      padding-top: 8px;
-    }
-
-    section h2 {
+    .essay h2 {
       font-family: 'Hubot Sans', -apple-system, BlinkMacSystemFont, sans-serif;
       font-size: 1.35rem;
       font-weight: 500;
       letter-spacing: -0.01em;
-      margin-bottom: 20px;
       line-height: 1.3;
-    }
-
-    section p {
-      color: var(--text-muted);
+      margin-top: 2.75rem;
       margin-bottom: 16px;
     }
 
-    section p:last-child {
+    .essay p {
+      color: var(--text-muted);
+      margin-bottom: 20px;
+    }
+
+    .essay p strong {
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    .essay p:last-child {
       margin-bottom: 0;
     }
 
-    .section-lead {
-      font-style: italic;
-      color: var(--text) !important;
-      margin-bottom: 12px !important;
+    .coming-soon {
+      display: block;
+      max-width: calc(var(--max-width) + var(--page-padding) * 2);
+      margin: 0 auto;
+      padding: 56px var(--page-padding) 96px;
+      font-family: 'Hubot Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      font-size: 1.15rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text);
+      border-top: 1px solid var(--border);
+      text-align: center;
     }
 
     /* Footer */
@@ -242,6 +350,13 @@
       color: var(--text);
     }
 
+    @media (prefers-reduced-motion: reduce) {
+      .rainbow-strip,
+      .rainbow-strip__inner {
+        animation: none;
+      }
+    }
+
     /* Responsive */
     @media (max-width: 600px) {
       main {
@@ -250,22 +365,39 @@
       }
 
       .header-inner {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 16px;
+        position: relative;
+      }
+
+      .menu-toggle {
+        display: flex;
       }
 
       nav {
-        gap: 20px;
-        flex-wrap: wrap;
+        display: none;
+        position: absolute;
+        top: calc(100% + 4px);
+        right: var(--page-padding);
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+        min-width: 168px;
+        padding: 6px 0;
+        background: rgba(250, 250, 250, 0.98);
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
       }
 
-      .hero {
-        margin-bottom: 56px;
+      nav.is-open {
+        display: flex;
       }
 
-      section {
-        margin-bottom: 48px;
+      nav a {
+        padding: 12px 20px;
+      }
+
+      nav a:hover {
+        background: rgba(0, 0, 0, 0.03);
       }
     }
   </style>
@@ -275,68 +407,70 @@
   <header>
     <div class="header-inner">
       <a class="site-logo" href="/">Pippin Robotics</a>
-      <nav>
+      <button class="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false"
+        aria-controls="site-nav">
+        <span class="menu-toggle__bar"></span>
+        <span class="menu-toggle__bar"></span>
+        <span class="menu-toggle__bar"></span>
+      </button>
+      <nav id="site-nav">
         <a href="#mission">Mission</a>
         <a href="#approach">Approach</a>
       </nav>
     </div>
+    <div class="rainbow-strip-wrap" aria-hidden="true">
+      <div class="rainbow-strip">
+        <div class="rainbow-strip__inner"></div>
+      </div>
+    </div>
   </header>
 
   <main>
-    <div class="hero">
-      <p class="hero-badge">Coming soon</p>
+    <article class="essay">
       <h1>Humanoid robots built for everyday life.</h1>
-      <p class="hero-lead">
+
+      <p>
         Pippin Robotics is building AI-powered humanoids for the homes, workplaces, and routines people already
-        have.
+        have. Most robots ask you to adapt to them: new layouts, new workflows, new expectations. We are building
+        Pippin to work within what already exists — capable in ordinary spaces, safe around the people in them, and
+        practical enough to become part of daily life.
       </p>
-      <p class="hero-body">
-        Most robots ask you to adapt to them: new layouts, new workflows, new expectations. We are building Pippin
-        to work within what already exists. Capable in ordinary spaces, safe around the people in them, and practical
-        enough to become part of daily life.
-      </p>
-    </div>
 
-    <section id="mission">
-      <h2>Humanoids that work with people</h2>
-      <p class="section-lead">Robots that meet you where you are.</p>
-      <p>
-        Humanoid robots belong in the environments people already inhabit. We are building Pippin to work in those
-        spaces alongside you, picking up on how you move and what you need rather than asking you to learn a new way
-        of living or working.
-      </p>
-    </section>
+      <h2 id="mission">Alongside, not apart</h2>
 
-    <section>
-      <h2>Safe by design</h2>
-      <p class="section-lead">Safety is not an afterthought.</p>
       <p>
-        A humanoid robot in your home or workplace has to feel like it belongs there. We are designing for predictable
-        behavior, transparent limitations, and conservative defaults. Trust comes from a robot that respects the
-        space and the people already in it.
+        <strong>Humanoids meant for shared spaces.</strong> Humanoid robots belong in the environments people
+        already inhabit. We are building Pippin to work in those spaces alongside you, picking up on how you move
+        and what you need rather than asking you to learn a new way of living or working.
       </p>
-    </section>
 
-    <section id="approach">
-      <h2>Built for the real world</h2>
-      <p class="section-lead">Capability that holds up outside the lab.</p>
-      <p>
-        Pippin is designed for the physical world as it is: doorways, stairs, cluttered rooms, and shifting tasks.
-        No custom floor plan. No dedicated lab. Just a humanoid built to navigate and work in the spaces you already
-        use.
-      </p>
-    </section>
+      <h2>Earned trust</h2>
 
-    <section>
-      <h2>Learning by doing</h2>
-      <p class="section-lead">Research and product, together.</p>
       <p>
-        We believe the best humanoid robotics comes from building in the real world, not around it. Products keep
-        us grounded in how people actually live; rigorous engineering keeps us moving forward. We plan to share what
-        we learn along the way.
+        <strong>Safety woven into every decision.</strong> A humanoid robot in your home or workplace has to feel
+        like it belongs there. We are designing for predictable behavior, transparent limitations, and conservative
+        defaults. Trust comes from a robot that respects the space and the people already in it.
       </p>
-    </section>
+
+      <h2 id="approach">Where you already are</h2>
+
+      <p>
+        <strong>Homes, offices, and everyday routines.</strong> Pippin is designed for the physical world as it is:
+        doorways, stairs, cluttered rooms, and shifting tasks. No custom floor plan. No dedicated lab. Just a
+        humanoid built to navigate and work in the spaces you already use.
+      </p>
+
+      <h2>Build in the field</h2>
+
+      <p>
+        <strong>Robots improve by being used.</strong> We believe the best humanoid robotics comes from building in
+        the real world, not around it. Products keep us grounded in how people actually live; rigorous engineering
+        keeps us moving forward. We plan to share what we learn along the way.
+      </p>
+    </article>
   </main>
+
+  <p class="coming-soon">Coming soon</p>
 
   <footer>
     <div class="footer-inner">
@@ -346,6 +480,37 @@
       </div>
     </div>
   </footer>
+
+  <script>
+    (function () {
+      const toggle = document.querySelector('.menu-toggle');
+      const nav = document.getElementById('site-nav');
+      if (!toggle || !nav) return;
+
+      function setOpen(open) {
+        nav.classList.toggle('is-open', open);
+        toggle.setAttribute('aria-expanded', open);
+        toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+      }
+
+      toggle.addEventListener('click', function () {
+        setOpen(!nav.classList.contains('is-open'));
+      });
+
+      nav.querySelectorAll('a').forEach(function (link) {
+        link.addEventListener('click', function () {
+          setOpen(false);
+        });
+      });
+
+      document.addEventListener('click', function (event) {
+        if (!nav.classList.contains('is-open')) return;
+        if (!nav.contains(event.target) && !toggle.contains(event.target)) {
+          setOpen(false);
+        }
+      });
+    })();
+  </script>
 </body>
 
 </html>
